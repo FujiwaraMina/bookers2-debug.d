@@ -4,6 +4,7 @@
       <th></th>
       <th>Title</th>
       <th>Opinion</th>
+      <th>Tag</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,13 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
+        <td>
+          <% tag_list.each do |list| %>
+            <%=link_to list.name,search_tag_path(tag_id: list.id) %>
+          <% end %>
+          <% posts.each do |post| %>
+          <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
+        </td>
         <td id="favorite_buttons_<%= book.id %>">
            <%= render "favorites/favorite",book: book %>
         </td>

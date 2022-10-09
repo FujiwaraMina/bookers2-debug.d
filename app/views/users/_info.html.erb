@@ -28,10 +28,12 @@
  <% end %>
 </div>
 
+<% if user.name !="guestuser" %>
 <div class='row'>
   <% if current_user == user %>
-  <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-    <i class="fas fa-user-cog"></i>
-  <% end %>
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+    <% end %>
   <% end %>
 </div>
+<% end %>
