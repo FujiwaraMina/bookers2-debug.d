@@ -10,7 +10,7 @@
         <% end %>
       </ul>
     <% end %>
-  		<%= render 'form', book: @book %>
+  		<%= render 'form', book: @book,tag_list: @tag_list %>
   		<%= link_to 'Show', @book %> |
   		<%= link_to 'Back', books_path, class: "back" %>
   </div>

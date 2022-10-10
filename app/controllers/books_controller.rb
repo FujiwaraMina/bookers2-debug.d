@@ -9,9 +9,10 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.page(params[:page]).per(10)
-    @book = Book.new
+    @book = Book.all
+    @book_new = Book.new
     @tag_list = Tag.all
+    @book_tag = Book.page(params[:page]).per(10)
   end
 
   def create
@@ -29,7 +30,7 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    @tag_list = @book.tags.plunk(:name).join(',')
+    @tag_list = @book.tags.pluck(:name).join(',')
     if @book.user == current_user
       render "edit"
     else
@@ -41,10 +42,15 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @tag_list = params[:book][:name].split(',')
     if @book.update(book_params)
-       @book.save_tag(tag_list)
+      if @old_relations = BookTag.where(book_id: @book.id)
+         @old_relations.each do |relation|
+           relation.delete
+         end
+       @book.save_tag(@tag_list)
       redirect_to book_path(@book), notice: "You have updated book successfully."
-    else
+      else
       render "edit"
+      end
     end
   end
 
@@ -57,7 +63,7 @@ class BooksController < ApplicationController
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
-    @books = @tag/posts.page(params[:page]).per(10)
+    @books= @tag.books.page(params[:page]).per(10)
   end
 
   private

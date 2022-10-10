@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "search" => "searches#search"
-  get "search_tsg" => "books#search_tag"
+  get "search_tag" => "books#search_tag"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
   devise_scope :user do

@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% books.each do |book| %>
+    <% book.each do |book| %>
       <tr>
         <td><%= link_to(book.user) do %>
           <%= image_tag book.user.get_profile_image, size:'50x50' %>
@@ -18,11 +18,9 @@
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
         <td>
-          <% tag_list.each do |list| %>
-            <%=link_to list.name,search_tag_path(tag_id: list.id) %>
+          <% book_tag.each do |booktag| %>
+          <%= booktag.tags.map(&:name).join(', ') %>
           <% end %>
-          <% posts.each do |post| %>
-          <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
         </td>
         <td id="favorite_buttons_<%= book.id %>">
            <%= render "favorites/favorite",book: book %>
