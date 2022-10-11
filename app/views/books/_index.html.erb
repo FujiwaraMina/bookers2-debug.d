@@ -18,9 +18,7 @@
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
         <td>
-          <% book_tag.each do |booktag| %>
-          <%= booktag.tags.map(&:name).join(', ') %>
-          <% end %>
+          <%= link_to book.tags.map(&:name).join(', '),search_tag_path(book.tags) %>
         </td>
         <td id="favorite_buttons_<%= book.id %>">
            <%= render "favorites/favorite",book: book %>

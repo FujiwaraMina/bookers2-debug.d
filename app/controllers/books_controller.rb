@@ -9,10 +9,9 @@ class BooksController < ApplicationController
   end
 
   def index
-    @book = Book.all
+    @book = Book.page(params[:page]).per(10)
     @book_new = Book.new
     @tag_list = Tag.all
-    @book_tag = Book.page(params[:page]).per(10)
   end
 
   def create
@@ -64,6 +63,7 @@ class BooksController < ApplicationController
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])
     @books= @tag.books.page(params[:page]).per(10)
+    @keyword = params[:keyword]
   end
 
   private

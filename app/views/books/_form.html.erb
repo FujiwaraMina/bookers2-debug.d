@@ -7,16 +7,12 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
-  </div>
-
   <div class="field" >
     <%= f.label "Tag" %>
     <%= f.text_field :name,value: tag_list,class: "form-control" %>
   </div>
     <div class="actions" style="margin:20px 0;">
-    <%= f.submit "投稿",class:"btn btn-outline-primary btn-block" %>
+    <%= f.submit "Create Book",class:"btn btn-success btn-block" %>
 </div>
 <% end %>
 
